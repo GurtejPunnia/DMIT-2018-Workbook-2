@@ -10,25 +10,16 @@
 namespace WebAppCRUD.Admin {
     
     
-    public partial class ViewProducts {
+    public partial class ViewSupplier {
         
         /// <summary>
-        /// ProductGridView control.
+        /// SupplierRepeater control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView ProductGridView;
-        
-        /// <summary>
-        /// ProductsDataSource control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ObjectDataSource ProductsDataSource;
+        protected global::System.Web.UI.WebControls.Repeater SupplierRepeater;
         
         /// <summary>
         /// SupplierDataSource control.
@@ -38,14 +29,5 @@ namespace WebAppCRUD.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ObjectDataSource SupplierDataSource;
-        
-        /// <summary>
-        /// CategoriesDataSource control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ObjectDataSource CategoriesDataSource;
     }
 }
