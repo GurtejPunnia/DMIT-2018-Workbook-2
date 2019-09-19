@@ -2,23 +2,46 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
     <h1>View Supplier</h1>
+    <asp:ListView ID="SupplierListView" runat="server" DataSourceID="SupplierDataSource" ItemType="WestWindSystem.Entities.Supplier">
+    <LayoutTemplate>
 
-    <asp:Repeater ID="SupplierRepeater" runat="server" DataSourceID="SupplierDataSource" ItemType="WestWindSystem.Entities.Supplier">
-        <HeaderTemplate><ul></HeaderTemplate>
+        <table class="table table-hover table-condensed">
+            <thead>
+                <tr>
+                     <th>ID</th>
+                     <th>Company</th>
+                     <th>Contact</th>
+                     <th>Contact Title</th>
+                     <th>Address</th>
+                     <th>Phone</th>
+                     <th>Email</th>
+                     <th>Fax</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr runat="server" id="itemPlaceholder"></tr>
+            </tbody>
+        </table>
+    </LayoutTemplate>
         <ItemTemplate>
-            <li>
-                <b><%#Item.CompanyName %></b>
-                &ndash;
-                <%#Item.CompanyName %>
-                &ndash;
-                <a href="mailto: <%# Item.Email %><%#Item.ContactName %>">(<%#Item.Phone %></a>
-               
-                <%#Item.Email %>
 
-            </li></ItemTemplate>
-        <SeparatorTemplate></SeparatorTemplate>
-        <FooterTemplate></ul></FooterTemplate>
-    </asp:Repeater>
+             <tr>
+                     <td><%# Item.SupplierID %></td>
+                     <td><%# Item.CompanyName %></td>
+                     <td><%# Item.ContactName %></td>
+                     <td><%# Item.ContactTitle %></td>
+                     <td><%# Item.AddressID %></td>
+                     <td><%# Item.Phone %></td>
+                     <td><%# Item.Email %></td>
+                     <td><%# Item.Fax %></td>
+                    
+                </tr>
+
+        </ItemTemplate>
+    </asp:ListView>
+
+
+    
 
     <asp:ObjectDataSource ID="SupplierDataSource" runat="server" OldValuesParameterFormatString="original_{0}" SelectMethod="ListSuppliers" TypeName="WestWindSystem.BLL.CRUDController"></asp:ObjectDataSource>
 </asp:Content>
