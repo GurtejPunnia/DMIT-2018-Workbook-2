@@ -13,6 +13,24 @@ namespace WebAppCRUD.Admin {
     public partial class ViewSupplier {
         
         /// <summary>
+        /// MessageUserControl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::FreeCode.WebApp.UserControls.MessageUserControl MessageUserControl;
+        
+        /// <summary>
+        /// Messagelabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Messagelabel;
+        
+        /// <summary>
         /// SupplierListView control.
         /// </summary>
         /// <remarks>
