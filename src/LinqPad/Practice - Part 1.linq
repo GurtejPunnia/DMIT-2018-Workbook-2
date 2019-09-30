@@ -1,9 +1,20 @@
-<Query Kind="Expression" />
+<Query Kind="Expression">
+  <Connection>
+    <ID>e4cac3fc-d638-45de-8757-3f8239b31f9c</ID>
+    <Persist>true</Persist>
+    <Server>.</Server>
+    <Database>WestWind</Database>
+    <ShowServer>true</ShowServer>
+  </Connection>
+</Query>
 
 // Practice questions - do each one in a separate LinqPad query.
 /*
 
 A) List all the customer company names for those with more than 5 orders.
+ 
+   
+
 B) Get a list of all the region names
 C) Get a list of all the territory names
 D) List all the regions and the number of territories in each region
@@ -15,3 +26,120 @@ H) List all the discontinued products, specifying the product name and unit pric
 I) List the company names of all Suppliers in North America (Canada, USA, Mexico)
 
 */
+
+
+//A) List all the customer company names for those with more than 5 orders.
+
+
+/*from CompanyName in Customers
+where CompanyName.Orders.Count >=5
+select CompanyName 
+
+*/
+
+//B) Get a list of all the region names
+
+/*
+from RegionDescription in Regions
+select RegionDescription
+
+*/
+
+//C) Get a list of all the territory names
+
+/*
+from data in Territories
+select new
+{
+    Territory = data.TerritoryDescription
+    
+}
+
+*/
+
+//D) List all the regions and the number of territories in each region
+
+/*from row in Regions
+group  row by   row.RegionDescription into TerritoriesbyRegion
+select new
+{
+   Country = TerritoriesbyRegion,
+   Territories = from data in TerritoriesbyRegion
+               select new
+               {
+			       Region = data.RegionID
+				  
+               }
+}
+*/
+
+//E) List all the region and territory names in a "flat" list
+
+/*from data in Territories
+select new
+{
+   Territory = data.TerritoryDescription,
+   Region = data.RegionID
+}
+*/
+
+//F) List all the region and territory names as an "object graph"
+   //- use a nested query
+
+/*from data in Territories
+select new
+{
+Territory = data.TerritoryDescription,
+Region = from item in Regions
+select item.RegionDescription
+}
+*/
+
+//G) List all the product names that contain the word "chef" in the name.
+/*
+from data in Products
+where data.ProductName.Contains("chef")
+select data
+
+*/
+
+// H) List all the discontinued products, specifying the product name and unit price.
+/*
+from data in Products 
+where data.Discontinued == true
+select new
+
+{
+Product = data.ProductName,
+Price = data.UnitPrice,
+Discontinued = data.Discontinued
+}
+
+*/
+
+
+//I) List the company names of all Suppliers in North America (Canada, USA, Mexico)
+
+
+from row in Suppliers
+group  row   by   row.Address.Country into NamesByCountry
+
+//    \what/      \       how       /
+select new
+{
+
+   Country = NamesByCountry, // the key is "how" we have sorted the data
+   Customers = from data in NamesByCountry
+               select new
+               {
+			       Company = data.CompanyName
+               }
+}
+
+
+
+
+
+
+
+ 
