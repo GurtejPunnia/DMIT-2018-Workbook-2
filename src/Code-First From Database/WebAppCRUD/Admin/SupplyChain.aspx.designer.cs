@@ -10,16 +10,7 @@
 namespace WebAppCRUD.Admin {
     
     
-    public partial class SuplyChain {
-        
-        /// <summary>
-        /// SupplierDataSource control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ObjectDataSource SupplierDataSource;
+    public partial class SupplyChain {
         
         /// <summary>
         /// SupplierSummaryRepeater control.
@@ -29,5 +20,14 @@ namespace WebAppCRUD.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater SupplierSummaryRepeater;
+        
+        /// <summary>
+        /// SupplierSummaryDataSource control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ObjectDataSource SupplierSummaryDataSource;
     }
 }

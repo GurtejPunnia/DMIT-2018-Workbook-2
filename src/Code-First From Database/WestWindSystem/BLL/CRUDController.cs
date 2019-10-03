@@ -13,63 +13,32 @@ namespace WestWindSystem.BLL
     public class CRUDController
     {
         #region Products CRUD
-
         [DataObjectMethod(DataObjectMethodType.Select)]
-
         public List<Product> ListProducts()
         {
             using (var context = new WestWindContext())
             {
                 return context.Products.ToList();
-
             }
         }
-
         #endregion
 
-        #region Supplier CRUD 
+        #region Suppliers CRUD
         [DataObjectMethod(DataObjectMethodType.Select)]
         public List<Supplier> ListSuppliers()
         {
-            using(var context = new WestWindContext())
+            using (var context = new WestWindContext())
             {
-               
-
+                // .Include(string) will "eager load" the Address information
+                // for the supplier.
                 return context.Suppliers.Include(nameof(Supplier.Address)).ToList();
             }
         }
 
-        #endregion
-
-        #region Category CRUD
-        [DataObjectMethod(DataObjectMethodType.Select)]
-        public List<Category> ListCategories()
+        [DataObjectMethod(DataObjectMethodType.Insert)]
+        public void AddSupplier(Supplier item)
         {
             using (var context = new WestWindContext())
-            {
-                return context.Categories.ToList();
-            }
-        }
-        #endregion
-
-        #region Address CRUD
-        [DataObjectMethod(DataObjectMethodType.Select)]
-        public List<Address> ListAddresses()
-        {
-            using (var context = new WestWindContext())
-            {
-                return context.Addresses.ToList();
-
-               
-            }
-        }
-
-        #endregion
-
-       [DataObjectMethod(DataObjectMethodType.Insert)]
-       public void AddSupplier(Supplier item)
-        {
-            using(var context = new WestWindContext())
             {
                 context.Suppliers.Add(item);
                 context.SaveChanges();
@@ -82,10 +51,8 @@ namespace WestWindSystem.BLL
             using (var context = new WestWindContext())
             {
                 var existing = context.Entry(item);
-                existing.State = 
-                System.Data.Entity.EntityState.Modified;
+                existing.State = System.Data.Entity.EntityState.Modified;
                 context.SaveChanges();
-
             }
         }
 
@@ -94,13 +61,33 @@ namespace WestWindSystem.BLL
         {
             using (var context = new WestWindContext())
             {
-                var existing = context.Suppliers.Find
-                    (item.SupplierID);
+                var existing = context.Suppliers.Find(item.SupplierID);
                 context.Suppliers.Remove(existing);
                 context.SaveChanges();
             }
         }
-        //add Addresses
+        #endregion
+
+        #region Categories CRUD
+        [DataObjectMethod(DataObjectMethodType.Select)]
+        public List<Category> ListCategories()
+        {
+            using (var context = new WestWindContext())
+            {
+                return context.Categories.ToList();
+            }
+        }
+        #endregion
+
+        #region Addresses CRUD
+        [DataObjectMethod(DataObjectMethodType.Select)]
+        public List<Address> ListAddresses()
+        {
+            using (var context = new WestWindContext())
+            {
+                return context.Addresses.ToList();
+            }
+        }
 
         [DataObjectMethod(DataObjectMethodType.Insert)]
         public void AddAddress(Address item)
@@ -118,10 +105,8 @@ namespace WestWindSystem.BLL
             using (var context = new WestWindContext())
             {
                 var existing = context.Entry(item);
-                existing.State =
-                System.Data.Entity.EntityState.Modified;
+                existing.State = System.Data.Entity.EntityState.Modified;
                 context.SaveChanges();
-
             }
         }
 
@@ -130,13 +115,11 @@ namespace WestWindSystem.BLL
         {
             using (var context = new WestWindContext())
             {
-                var existing = context.Addresses.Find
-                    (item.AddressID);
+                var existing = context.Addresses.Find(item.AddressID);
                 context.Addresses.Remove(existing);
                 context.SaveChanges();
             }
         }
-
-
+        #endregion
     }
 }

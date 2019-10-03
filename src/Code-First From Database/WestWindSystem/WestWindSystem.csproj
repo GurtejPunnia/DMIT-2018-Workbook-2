@@ -70,8 +70,8 @@
     <Compile Include="Entities\Territory.cs" />
     <Compile Include="DAL\WestWindContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ReadModels\Class1.cs" />
     <Compile Include="ReadModels\SupplierProduct.cs" />
+    <Compile Include="ReadModels\SupplierSummary.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
