@@ -1,7 +1,6 @@
 <Query Kind="Expression">
   <Connection>
     <ID>e4cac3fc-d638-45de-8757-3f8239b31f9c</ID>
-    <Persist>true</Persist>
     <Server>.</Server>
     <Database>WestWind</Database>
     <ShowServer>true</ShowServer>
@@ -59,19 +58,13 @@ select new
 
 //D) List all the regions and the number of territories in each region
 
-/*from row in Regions
-group  row by   row.RegionDescription into TerritoriesbyRegion
+
+from place in Regions 
 select new
 {
-   Country = TerritoriesbyRegion,
-   Territories = from data in TerritoriesbyRegion
-               select new
-               {
-			       Region = data.RegionID
-				  
-               }
+Region = place.RegionDescription,
+TerritoryCount = place.Territories.Count()
 }
-*/
 
 //E) List all the region and territory names in a "flat" list
 
@@ -79,7 +72,7 @@ select new
 select new
 {
    Territory = data.TerritoryDescription,
-   Region = data.RegionID
+   Region = data.Region.RegionDescription
 }
 */
 
@@ -99,7 +92,7 @@ select item.RegionDescription
 /*
 from data in Products
 where data.ProductName.Contains("chef")
-select data
+select data.ProductName
 
 */
 
@@ -121,25 +114,8 @@ Discontinued = data.Discontinued
 //I) List the company names of all Suppliers in North America (Canada, USA, Mexico)
 
 
-from row in Suppliers
-group  row   by   row.Address.Country into NamesByCountry
-
-//    \what/      \       how       /
-select new
-{
-
-   Country = NamesByCountry, // the key is "how" we have sorted the data
-   Customers = from data in NamesByCountry
-               select new
-               {
-			       Company = data.CompanyName
-               }
-}
-
-
-
-
-
-
-
- 
+ from vendor in Suppliers
+ where vendor.Address.Country == "Canada"
+ ||  vendor.Address.Country == "USA"
+ ||  vendor.Address.Country == "Mexico"
+ select vendor.CompanyName
