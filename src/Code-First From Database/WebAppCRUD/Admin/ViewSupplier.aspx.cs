@@ -19,5 +19,10 @@ namespace WebAppCRUD.Admin
         {
             MessageUserControl.HandleDataBoundException(e);
         }
+
+        protected void SupplierListView_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
