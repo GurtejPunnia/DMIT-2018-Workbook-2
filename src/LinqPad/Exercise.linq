@@ -2,7 +2,6 @@
   <Connection>
     <ID>6946cc93-1af7-4287-8535-04fce39b0424</ID>
     <NamingServiceVersion>2</NamingServiceVersion>
-    <Persist>true</Persist>
     <Server>.</Server>
     <Database>GroceryList</Database>
   </Connection>
@@ -18,7 +17,8 @@
  {
  
  Product = product.Description,
- TimesPurchased =  product.OrderLists.Sum(lineItem => lineItem.QtyOrdered )
+ TimesPurchased =  product.OrderLists.Sum(lineItem => lineItem.QtyOrdered),
+ 
  }
  
 
@@ -52,10 +52,12 @@ select new
 x.City,
 x.Location,
 Sales = from y in Orders
+where y.OrderDate >= new DateTime (2017,12,01) && y.OrderDate < new DateTime(2018,01,01)
 select new
 {
 
 date = y.OrderDate,
+numberoforders = y.OrderLists.Count(),
 productsales = y.SubTotal,
 gst = y.GST
 } 
@@ -71,6 +73,7 @@ from customer in Products
 
 group customer by customer.Category.Description into StoreLocation
 
+
 select new
 {
     Location = StoreLocation.Key,
@@ -80,7 +83,7 @@ select new
                {
 			       Product = x.Description,
 				   Price = x.Price,
-				  
+				   PickedQty = x.OrderLists.Count(),
 				   Discount = x.Discount,
 				   Tax = x.Discount
                }
@@ -88,22 +91,25 @@ select new
 
 
 
-//List all the products a customer (use Customer #1) has purchased and the number of times the product was purchased.
+// 6.List all the products a customer (use Customer #1) has purchased and the number of times the product was purchased.
 //Sort the products by number of times purchased (highest to lowest) then
+
+
 
 from x in Customers
 where x.CustomerID == 1
+select new {
+Customer = x.LastName + " " + " " + x.FirstName,
+OrderCount = x.Orders.Count(),
+Items = from y in OrderLists
+where y.Order.CustomerID == 1
+group y by y.Product.Description into products
+orderby products.Count() descending 
 select new
 {
-FullName = x.FirstName + " " + " " + x.LastName,
-OrderCount = x.Orders.Count(),
-
-
-
+description = products.Key,
+timesbought = products.Count()
 
 }
 
-
-
-
-
+}
