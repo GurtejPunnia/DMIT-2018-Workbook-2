@@ -1,9 +1,9 @@
 <Query Kind="Expression">
   <Connection>
-    <ID>d00ceba6-b855-40d2-9637-7cbe1cb57e06</ID>
+    <ID>7909b5f7-75b8-4e81-b579-b85a8cdd1468</ID>
     <Persist>true</Persist>
     <Server>.</Server>
-    <Database>GroceryList</Database>
+    <Database>WestWind</Database>
     <ShowServer>true</ShowServer>
   </Connection>
 </Query>
