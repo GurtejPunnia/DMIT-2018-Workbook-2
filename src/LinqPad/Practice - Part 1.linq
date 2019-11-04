@@ -66,6 +66,8 @@ Region = place.RegionDescription,
 TerritoryCount = place.Territories.Count()
 }
 
+
+
 //E) List all the region and territory names in a "flat" list
 
 /*from data in Territories
@@ -76,17 +78,19 @@ select new
 }
 */
 
+
 //F) List all the region and territory names as an "object graph"
    //- use a nested query
 
-/*from data in Territories
+/*from data in Regions
 select new
 {
-Territory = data.TerritoryDescription,
-Region = from item in Regions
-select item.RegionDescription
+Regions = data.RegionDescription,
+Territiry = from item in data.Territories
+select item.TerritoryDescription
 }
 */
+
 
 //G) List all the product names that contain the word "chef" in the name.
 /*
