@@ -22,16 +22,16 @@ namespace WebApp.Admin.Security
 
             var adminUser = new ApplicationUser
             {
-                UserName = "WebAdmin",
-                Email = "696@hotmail.ca",
+                UserName = AdminUserName,
+                Email = AdminEmail,
                 EmailConfirmed = true
             };
 
             var userManager = new ApplicationUserManager(new UserStore<ApplicationUser>(context));
-            var result = userManager.Create(adminUser, "Password");
+            var result = userManager.Create(adminUser, AdminPassword);
             if (result.Succeeded)
             {
-                var found = userManager.FindByName("WebAdmin").Id;
+                var found = userManager.FindByName(AdminUserName).Id;
                 userManager.AddToRole(found, AdminRole);
 
             }
@@ -46,7 +46,7 @@ namespace WebApp.Admin.Security
                     EmailConfirmed = true,
                     PersonId = person.PersonID
                 };
-                result = userManager.Create(user, "password1");
+                result = userManager.Create(user, TempPassword);
                 if(result.Succeeded)
                 {
                     var userId = userManager.FindByName(user.UserName).Id;
