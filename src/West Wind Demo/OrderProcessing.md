@@ -8,8 +8,12 @@ Suppliers will be interacting with a page that shows the following information.
 
 ![Mockup](./Shipping-Orders.svg)
 
-The information shown here will be displayed in a **ListView**, using the *SelectedItemTemplate* as the part that shows the details for a given order.
+The information shown here will be displayed in a **ListView**, using the *EditItemTemplate* as the part that shows the details for a given order.
 
+![Mockups with Labels]
+shipping orders plan.svg
+
+-
 ## POCOs/DTO
 
 The POCOs/DTOs are simply classes that willl hold our data when we are performing Queries or issuing commands to the BLL. 
