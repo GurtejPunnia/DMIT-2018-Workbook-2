@@ -7,6 +7,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using WebApp.Models;
+using static WebApp.Admin.Security.Settings;
 
 namespace WebApp.Admin.Security
 {
@@ -15,8 +16,9 @@ namespace WebApp.Admin.Security
         protected override void Seed(ApplicationDbContext context)
         {
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
-            roleManager.Create(new IdentityRole { Name = "Administrators" });
-            roleManager.Create(new IdentityRole { Name = "Registered Users" });
+            foreach (var role in DefaultSecurityRoles)
+                roleManager.Create(new IdentityRole { Name = role });
+
 
             var adminUser = new ApplicationUser
             {
@@ -30,7 +32,7 @@ namespace WebApp.Admin.Security
             if (result.Succeeded)
             {
                 var found = userManager.FindByName("WebAdmin").Id;
-                userManager.AddToRole(found, "AdminiStrators");
+                userManager.AddToRole(found, AdminRole);
 
             }
             var demoManager = new DemoController();
@@ -48,9 +50,10 @@ namespace WebApp.Admin.Security
                 if(result.Succeeded)
                 {
                     var userId = userManager.FindByName(user.UserName).Id;
-                    userManager.AddToRole(userId, "Registered Users");
+                    userManager.AddToRole(userId, UserRole);
                 }
             }
+
 
 
 
