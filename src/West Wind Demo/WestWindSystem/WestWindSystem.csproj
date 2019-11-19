@@ -56,7 +56,7 @@
     <Compile Include="BLL\ProductManagementController.cs" />
     <Compile Include="BLL\SalesController.cs" />
     <Compile Include="BLL\SetupUserRegistrationController.cs" />
-    <Compile Include="DataModels\Class1.cs" />
+    <Compile Include="DataModels\ShipperSelection.cs" />
     <Compile Include="DataModels\DatabaseVersion.cs" />
     <Compile Include="DataModels\EditCustomerOrder.cs" />
     <Compile Include="DataModels\InvoiceHeader.cs" />
@@ -68,7 +68,6 @@
     <Compile Include="DataModels\ProductSummary.cs" />
     <Compile Include="DataModels\RegionalManager.cs" />
     <Compile Include="DataModels\SetupUserInfo.cs" />
-    <Compile Include="DataModels\ShipperSelection.cs" />
     <Compile Include="DataModels\ShippingDirections.cs" />
     <Compile Include="Entities\Address.cs" />
     <Compile Include="Entities\BuildVersion.cs" />
