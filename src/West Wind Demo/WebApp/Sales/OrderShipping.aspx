@@ -1,5 +1,11 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="OrderShipping.aspx.cs" Inherits="WebApp.Sales.OrderShipping" %>
 
+<<<<<<< HEAD
+=======
+<%@ Register Src="~/UserControls/MessageUserControl.ascx" TagPrefix="uc1" TagName="MessageUserControl" %>
+
+
+>>>>>>> a221dd781db1b484a63151d7d08edefe005d0a5a
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <h1 class="page-header">Order Shipping</h1>
 
@@ -11,8 +17,16 @@
                 <asp:Literal ID="SupplierInfo" runat="server" />
             </p>
 
+<<<<<<< HEAD
             <asp:ListView ID="CurrentOrders" runat="server"
                 DataSourceID="OrdersDataSource"
+=======
+            <uc1:MessageUserControl runat="server" ID="MessageUserControl" />
+
+            <asp:ListView ID="CurrentOrders" runat="server"
+                DataSourceID="OrdersDataSource"
+                OnItemCommand="CurrentOrders_ItemCommand"
+>>>>>>> a221dd781db1b484a63151d7d08edefe005d0a5a
                 ItemType="WestWindSystem.DataModels.OutstandingOrder">
                 <EditItemTemplate>
                     <tr class="bg-info">
@@ -34,11 +48,39 @@
                     <tr class="bg-info">
                         <td colspan="4">
                             <asp:Label ID="OrderComments" runat="server" Text="<%# Item.Comments %>" />
+<<<<<<< HEAD
                             <asp:DropDownList ID="ShipperDropDown" runat="server"></asp:DropDownList>
                             <asp:GridView ID="ProductsGridView" runat="server"
                                 CssClass="table table-hover table-condensed"
                                 DataSource="<%# Item.OutstandingItems %>">
 
+=======
+                            <asp:DropDownList ID="ShipperDropDown" runat="server"
+                                CssClass="form-control"
+                                DataSourceID="ShippersDataSource"
+                                DataTextField="Shipper" DataValueField="ShipperId"
+                                AppendDataBoundItems="true">
+                                <asp:ListItem Value="0">[Select a Shipper]</asp:ListItem>
+                            </asp:DropDownList>
+                            <asp:GridView ID="ProductsGridView" runat="server"
+                                CssClass="table table-hover table-condensed"
+                                DataSource="<%# Item.OutstandingItems %>"
+                                ItemType="WestWindSystem.DataModels.OrderProductInformation"
+                                AutoGenerateColumns="false"
+                                DataKeyNames="ProductId">
+                                <Columns>
+                                    <asp:BoundField DataField="ProductName" HeaderText="Product Name" />
+                                    <asp:BoundField DataField="Qty" HeaderText="Qty" />
+                                    <asp:BoundField DataField="QtyPerUnit" HeaderText="Qty per Unit" />
+                                    <asp:BoundField DataField="Outstanding" HeaderText="Outstanding" />
+                                    <asp:TemplateField HeaderText="Ship Quantity">
+                                        <ItemTemplate>
+                                            <asp:HiddenField ID="ProdId" runat="server" Value="<%# Item.ProductId %>" />
+                                            <asp:TextBox ID="ShipQuantity" runat="server" />
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                </Columns>
+>>>>>>> a221dd781db1b484a63151d7d08edefe005d0a5a
                             </asp:GridView>
                             <asp:Label ID="ShippingAddress" runat="server" Text="<%# Item.FullShippingAddress %>" />
                             <asp:TextBox ID="TrackingCode" runat="server" />
@@ -107,4 +149,8 @@
             <asp:ObjectDataSource ID="ShippersDataSource" runat="server" OldValuesParameterFormatString="original_{0}" SelectMethod="ListShippers" TypeName="WestWindSystem.BLL.OrderProcessingController"></asp:ObjectDataSource>
         </div>
     </div>
+<<<<<<< HEAD
 </asp:Content>
+=======
+</asp:Content>
+>>>>>>> a221dd781db1b484a63151d7d08edefe005d0a5a

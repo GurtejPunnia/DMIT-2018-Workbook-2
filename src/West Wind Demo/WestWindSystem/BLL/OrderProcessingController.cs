@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WestWindSystem.DAL;
 using WestWindSystem.DataModels;
+using WestWindSystem.Entities;
 
 namespace WestWindSystem.BLL
 {
@@ -71,7 +72,7 @@ namespace WestWindSystem.BLL
         [DataObjectMethod(DataObjectMethodType.Select)]
         public List<ShipperSelection> ListShippers()
         {
-            using (var context = new WestWindContext())
+            using(var context = new WestWindContext())
             {
                 var result = from shipper in context.Shippers
                              orderby shipper.CompanyName
@@ -88,6 +89,7 @@ namespace WestWindSystem.BLL
         #region Commands
         public void ShipOrder(int orderId, ShippingDirections shipping, List<ProductShipment> products)
         {
+<<<<<<< HEAD
             throw new NotImplementedException();
             // TODO: Validation:
             /*Validation:
@@ -104,6 +106,76 @@ namespace WestWindSystem.BLL
                 Add all manifest items
                 Check if order is complete; if so, update Order.Shipped
              */
+=======
+            using (var context = new WestWindContext())
+            {
+                var existingOrder = context.Orders.Find(orderId);
+                if (existingOrder == null)
+                    throw new Exception("Order does not exist");
+
+                if (existingOrder.Shipped)
+                    throw new Exception("This order has already been completed");
+                if (!existingOrder.OrderDate.HasValue)
+                    throw new Exception("This order is not ready to be shipped");
+
+                if (products == null || !products.Any())
+                    throw new Exception("No products identified for shipping");
+               
+                foreach(var item in products)
+                {
+                    if (item == null) throw new Exception("Blank item listed in products to be shipped");
+                    if (!existingOrder.OrderDetails.Any(x => x.ProductID == item.ProductId))
+                        throw new Exception($"The product {item.ProductId} does not exist in the order");
+
+
+                }
+                if (shipping == null) throw new Exception(" No shipping details provided");
+                var shipper = context.Shippers.Find(shipping.ShipperId);
+                if (shipper == null) throw new Exception("Invalid shipper id");
+                if (shipping.FreightCharge.HasValue && shipping.FreightCharge <= 0)
+                    throw new Exception("freight charge must be either a positive value or no charge");
+                // TODO: Validation:
+                /*Validation:
+                    OrderId must be valid
+                    products cannot be an empty list
+                    Products identified must be on the order
+                    Quantity must be greater than zero and less than or equal to the quantity outstanding
+                    Shipper must exist
+                    Freight charge must either be null (no charge) or > $0.00
+                */
+                // TODO: Processing the shipment
+
+
+                var ship = new Shipment
+                {
+                    OrderID = orderId,
+                    ShipVia = shipping.ShipperId,
+                    TrackingCode = shipping.TrackingCode,
+                    FreightCharge = shipping.FreightCharge.HasValue ? shipping.FreightCharge.Value : 0,
+                    ShippedDate = DateTime.Now
+
+                };
+
+                foreach (var item in products)
+                {
+                    ship.ManifestItems.Add(new ManifestItem
+                    {
+                        ProductID = item.ProductId,
+                        ShipQuantity = (short)item.ShipQuantity
+
+                    });
+                }
+
+                context.Shipments.Add(ship);
+                context.SaveChanges();
+                /*Processing (tables/data that must be updated/inserted/deleted/whatever)
+                    Create new Shipment
+                    Add all manifest items
+                    Check if order is complete; if so, update Order.Shipped
+                 */
+
+            }
+>>>>>>> a221dd781db1b484a63151d7d08edefe005d0a5a
         }
         #endregion
     }

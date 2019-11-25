@@ -22,6 +22,18 @@ namespace WebApp.Sales {
         protected global::System.Web.UI.WebControls.Literal SupplierInfo;
         
         /// <summary>
+<<<<<<< HEAD
+=======
+        /// MessageUserControl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::WebApp.UserControls.MessageUserControl MessageUserControl;
+        
+        /// <summary>
+>>>>>>> a221dd781db1b484a63151d7d08edefe005d0a5a
         /// CurrentOrders control.
         /// </summary>
         /// <remarks>
